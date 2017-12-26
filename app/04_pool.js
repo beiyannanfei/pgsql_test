@@ -30,6 +30,7 @@ function t2() {
 		return client.query('SELECT * FROM users WHERE name = $1', ["brianc1"]).then(res => {
 			client.release();
 			console.log(res.rows[0]);
+			pool.end();
 		}).catch(e => {
 			client.release();
 			console.log(err.stack);
