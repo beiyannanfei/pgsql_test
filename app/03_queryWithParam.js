@@ -63,7 +63,35 @@ function t3() { //查询配置对象
 	});
 }
 
-t3();
+function t4() {
+	co(function* () {
+		let delRes = yield client.query("drop table if exists users");
+		let createTbRes = yield client.query("CREATE TABLE users (name varchar(80),email varchar(80))");
+
+		const insertQuery = {
+			text: 'INSERT INTO users(name, email) VALUES($1, $2)',
+			values: ['brianc1', 'brian.m.carlson@gmail.com1'],
+		};
+		yield client.query(insertQuery);
+
+		// PostgreSQL具有准备好的语句的概念。
+		// node-postgres通过向name查询配置对象提供一个参数来支持这一点。
+		// 如果提供name参数，查询执行计划将在每个连接的基础上缓存在PostgreSQL服务器上。
+		// 这意味着如果您使用两个不同的连接，则每个连接都必须解析并计划一次查询。
+		// node-postgres为你处理这个问题透明：一个客户端只请求一个查询在第一次被分析的时候，特定的客户端看到了这个查询的名字：
+		const query = {
+			name: 'fetch-user', //give the query a unique name
+			text: "select * from users where name = $1",
+			values: [insertQuery.values[0]]
+		};
+		let {rows} = yield client.query(query);
+		console.log("rows = %j", rows);
+		rows = [{"name": "brianc1", "email": "brian.m.carlson@gmail.com1"}]
+	}).catch(err => {
+		console.log(err.stack || err.message || err);
+	});
+}
+
 
 
 
