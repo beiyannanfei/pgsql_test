@@ -92,7 +92,24 @@ function t4() {
 	});
 }
 
+function t5() {   //会报错，原因未知
+	// 行模式 - 默认情况下，node-postgres读取行并将其收集到JavaScript对象中，
+	// 使用与列名匹配的键和与每个列的相应行值相匹配的值。如果你不需要或不想要这个行为，
+	// 你可以传递rowMode: 'array'给一个查询对象。
+	// 这将通知结果解析器绕过将行收集到JavaScript对象中，而是将其作为值的数组返回。
+	const query = {
+		text: 'SELECT $1::text as first_name, select $2::text as last_name',
+		values: ['Brian', 'Carlson'],
+		rowMode: 'array',
+	};
+	client.query(query).then((rows) => {
+		console.log("rows = %j", rows);
+	}).catch(err => {
+		console.log(err.stack || err.message || err);
+	});
+}
 
+t5();
 
 
 
