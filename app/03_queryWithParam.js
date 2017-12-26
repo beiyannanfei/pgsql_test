@@ -33,9 +33,37 @@ function t2() {
 	});
 }
 
-t2();
+function t3() { //查询配置对象
+	co(function* () {
+		let delRes = yield client.query("drop table if exists users");
+		console.log("delRes = %j", delRes);
+		delRes = {
+			"command": "DROP", "rowCount": null, "oid": null, "rows": [],
+			"fields": [], "_parsers": [], "RowCtor": null, "rowAsArray": false
+		};
+		let createTbRes = yield client.query("CREATE TABLE users (name varchar(80),email varchar(80))");
+		console.log("createTbRes = %j", createTbRes);
+		createTbRes = {
+			"command": "CREATE", "rowCount": null, "oid": null, "rows": [],
+			"fields": [], "_parsers": [], "RowCtor": null, "rowAsArray": false
+		};
 
+		const query = {
+			text: 'INSERT INTO users(name, email) VALUES($1, $2)',
+			values: ['brianc1', 'brian.m.carlson@gmail.com1'],
+		};
+		let response = yield client.query(query);
+		console.log("response = %j", response);
+		response = {
+			"command": "INSERT", "rowCount": 1, "oid": 0, "rows": [], "fields": [],
+			"_parsers": [], "RowCtor": null, "rowAsArray": false
+		};
+	}).catch(err => {
+		console.log(err.stack || err.message || err);
+	});
+}
 
+t3();
 
 
 
