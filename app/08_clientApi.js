@@ -91,12 +91,15 @@ function t4() {
 	let query = client.query(new Query("select * from weather;"));
 	query.on('row', (row) => {
 		console.log('row = %j;', row);
-		row = {"city":"San Francisco","temp_lo":46,"temp_hi":50,"prcp":0.25,"date":"1994-11-26T16:00:00.000Z"};
-		row = {"city":"San Francisco","temp_lo":43,"temp_hi":57,"prcp":0,"date":"1994-11-28T16:00:00.000Z"};
-		row = {"city":"Hayward","temp_lo":37,"temp_hi":54,"prcp":null,"date":"1994-11-28T16:00:00.000Z"};
+		row = {"city": "San Francisco", "temp_lo": 46, "temp_hi": 50, "prcp": 0.25, "date": "1994-11-26T16:00:00.000Z"};
+		row = {"city": "San Francisco", "temp_lo": 43, "temp_hi": 57, "prcp": 0, "date": "1994-11-28T16:00:00.000Z"};
+		row = {"city": "Hayward", "temp_lo": 37, "temp_hi": 54, "prcp": null, "date": "1994-11-28T16:00:00.000Z"};
 	});
 	query.on('end', () => {
 		console.log('=== query done ===');
+		client.end().then(() => {
+			console.log("===== client end.")
+		});
 	});
 	query.on('error', (err) => {
 		console.error(err.stack);
