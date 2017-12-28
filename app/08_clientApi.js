@@ -52,7 +52,37 @@ function t2() { //client.query - text, optional values, and callback.
 	});
 }
 
-t2();
+function t3() {
+	const client = new Client({
+		database: 'mydb',
+	});
+	client.connect().then(response => {
+		console.log("connected success");
+		const query = {name: 'get-name', text: 'SELECT $1::text', values: ['brianc'], rowMode: 'array'};
+		return client.query(query);
+	}).then(({rows}) => {
+		console.log("rows = %j", rows);   //rows = [["brianc"]]
+		const query = {
+			name: 'get-user',
+			text: "select * from weather where city = $1::text",
+			values: ["San Francisco"],
+			rowMode: 'array'
+		};
+		return client.query(query);
+	}).then(({rows}) => {
+		console.log("rows = %j;", rows);
+		rows = [
+			["San Francisco", 46, 50, 0.25, "1994-11-26T16:00:00.000Z"],
+			["San Francisco", 43, 57, 0, "1994-11-28T16:00:00.000Z"]
+		];
+		return client.end();
+	}).catch(err => {
+		client.end();
+		return console.log("err: %j", err.stack || err.message || err);
+	});
+}
+
+t3();
 
 
 
