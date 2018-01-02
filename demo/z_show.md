@@ -26,8 +26,10 @@
     \du：列出所有用户。
     \e：打开文本编辑器。
     \conninfo：列出当前数据库和连接的信息。
+    \q：退出qsql。
     select version();  查看版本
 ```
+> 注意: 上述命令需访问具体数据后执行;
     
 可视化客户端[pgadmin](https://www.postgresql.org/ftp/pgadmin/pgadmin4/v2.0/macos/)
 ![pgadmin](https://raw.githubusercontent.com/beiyannanfei/pgsql_test/master/demo/pic/02.jpg)    
