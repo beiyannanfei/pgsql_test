@@ -70,8 +70,6 @@ function t4() {
 			console.log("after release pool.waitingCount = %j", pool.waitingCount);  //0 等待客户端的排队请求数
 		});
 	});
-
-
 }
 
 t4();
