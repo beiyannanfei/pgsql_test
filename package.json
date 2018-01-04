@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "co": "^4.6.0",
+    "moment": "^2.20.1",
     "pg": "^7.4.0"
   }
 }
