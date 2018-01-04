@@ -47,8 +47,8 @@ function t2() {   //promise模式
 }
 
 function t3() { //query
-                //通常，我们只需要在数据库上运行一个查询，为了方便，pool有一个方法来在第一个可用的空闲客户端上运行查询并返回结果。
-                // 同时pool.query使用完成后不需要释放，pool内部会自动完成释放
+	//通常，我们只需要在数据库上运行一个查询，为了方便，pool有一个方法来在第一个可用的空闲客户端上运行查询并返回结果。
+	// 同时pool.query使用完成后不需要释放，pool内部会自动完成释放
 	pool.query("select now()").then(({rows}) => {
 		console.log("rows: %j", rows);
 	}).catch(e => {
@@ -57,12 +57,17 @@ function t3() { //query
 }
 
 function t4() {
+	pool.query("select now()");
+	pool.query("select now()");
+	pool.query("select now()");
+	pool.query("select now()");
+
 	pool.connect((err, client, release) => {
 		client.query("select now()", (err, {rows}) => {
+			console.log("rows: %j", rows);
 			console.log("before release pool.totalCount = %j", pool.totalCount);  //1 池中存在的客户端总数。
 			console.log("before release pool.idleCount = %j", pool.idleCount);    //0 未检出但当前在池中闲置的客户端数量。
 			console.log("before release pool.waitingCount = %j", pool.waitingCount); //0 等待客户端的排队请求数
-
 
 			release();
 			console.log("after release pool.totalCount = %j", pool.totalCount);   //1 池中存在的客户端总数。
@@ -70,6 +75,24 @@ function t4() {
 			console.log("after release pool.waitingCount = %j", pool.waitingCount);  //0 等待客户端的排队请求数
 		});
 	});
+
+	pool.on("connect", (client) => {//每当池建立一个新的客户端连接到PostgreSQL后端时,触发事件，提供了在客户端上运行设置命令的机会。
+		console.log("========= connect");
+		client.query('SET DATESTYLE = iso, mdy');
+	});
+
+	pool.on("acquire", (client) => {//无论何时从池中检出一个客户端，池将向acquire获取的客户端发送事件。
+		console.log("========= acquire");
+	});
+
+	pool.on("error", (err, client) => {
+		console.log("======== err: %j", err.stack || err.message || err);
+	});
+
+	pool.on("remove", (client) => {//每当客户关闭并从池中移除时，池将发出remove事件。
+		console.log("========= remove");
+	});
+	pool.end();   //call remove event
 }
 
 t4();
