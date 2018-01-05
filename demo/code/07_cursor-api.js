@@ -51,8 +51,12 @@ function t1() {
 				});
 			});
 		};
-		while (rows = yield cursor.readSync()) {
-
+		while (1) {
+			let rows = yield cursor.readSync();
+			if (!rows.length) {
+				break;
+			}
+			console.log("rows = %j", rows);
 		}
 		/*let rows = yield cursor.readSync();
 		console.log("rows = %j", rows);
