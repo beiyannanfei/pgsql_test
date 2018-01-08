@@ -1,14 +1,14 @@
 # PostgreSQL
 
-### 1.安装
+### 1. 安装
     brew install postgresql
 ![安装-MAC](https://raw.githubusercontent.com/beiyannanfei/pgsql_test/master/demo/pic/01.jpg)
 ----
 
-### 2.启动
+### 2. 启动
     pg_ctl -D /usr/local/var/postgres start
 
-### 3.基本操作
+### 3. 基本操作
 ```
     createdb demo_db    //创建数据库
     dropdb demo_db      //删除数据库
@@ -35,7 +35,7 @@
 ![pgadmin](https://raw.githubusercontent.com/beiyannanfei/pgsql_test/master/demo/pic/02.jpg)    
 ----
 
-### 4.表
+### 4. 表
     可以通过声明表的名字和所有字段的名字及其类型来创建表：
     PostgreSQL支持标准的SQL类型：int, smallint, real, double precision, char(N), varchar(N), date, time, timestamp,
     和 interval，还支持其它的通用类型和丰富的几何类型。   
@@ -85,7 +85,7 @@ JSON 函数和操作符[functions-json](http://www.postgres.cn/docs/9.3/function
 > 删除表：DROP TABLE tablename;
 ----
 
-### 5.js库
+### 5. js库
     npm install pg
 ----    
 
