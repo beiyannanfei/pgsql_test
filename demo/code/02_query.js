@@ -18,7 +18,7 @@ function t1() {
 		});
 }
 
-// t1();
+t1();
 
 function t2() {
 	co(function* () {
@@ -72,7 +72,6 @@ function t3(score) {
 }
 
 // t3(90); //rows = [{"name":"zs","subject":"python","score":92},{"name":"ww","subject":"go","score":98}]
-
 // t3(`90;drop table users;`); //sql注入
 
 function t4(score) {
