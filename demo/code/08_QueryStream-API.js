@@ -22,6 +22,7 @@ co(function* () {
 	const query = new QueryStream("select * from t1");
 	const stream = client.query(query);
 
+	// stream.pipe(JSONStream.stringify()).pipe(process.stdout);
 	stream.on('end', function () {
 		console.log("======= end");
 	});
