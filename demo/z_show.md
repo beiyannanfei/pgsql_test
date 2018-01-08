@@ -35,11 +35,7 @@
 ![pgadmin](https://raw.githubusercontent.com/beiyannanfei/pgsql_test/master/demo/pic/02.jpg)    
 ----
 
-### 4.js库
-    npm install pg
-----
-
-### 5.表
+### 4.表
     可以通过声明表的名字和所有字段的名字及其类型来创建表：
     PostgreSQL支持标准的SQL类型：int, smallint, real, double precision, char(N), varchar(N), date, time, timestamp,
     和 interval，还支持其它的通用类型和丰富的几何类型。   
@@ -86,10 +82,12 @@
              
 JSON 函数和操作符[functions-json](http://www.postgres.cn/docs/9.3/functions-json.html)       
 
-
-
 > 删除表：DROP TABLE tablename;
-    
+----
+
+### 5.js库
+    npm install pg
+----    
 
 
     
