@@ -85,10 +85,11 @@
 
 
 
+> 删除表：DROP TABLE tablename;
+    
 
 
-
-    删除表：DROP TABLE tablename;
+    
 
 
 
