@@ -42,7 +42,8 @@
 ### 5.表
     可以通过声明表的名字和所有字段的名字及其类型来创建表：
     PostgreSQL支持标准的SQL类型：int, smallint, real, double precision, char(N), varchar(N), date, time, timestamp,
-    和 interval，还支持其它的通用类型和丰富的几何类型。    
+    和 interval，还支持其它的通用类型和丰富的几何类型。   
+数据类型[datatype](http://www.postgres.cn/docs/9.3/datatype.html)     
 ```
     CREATE TABLE weather (
         a   smallint,               //-32768 到 +32767
@@ -60,14 +61,14 @@
         m   time,                   //只用于一日内时间,eg. 08:10:54
         n   boolean,                //布尔类型, 真(TRUE 't' 'true' 'y' 'yes' 'on' '1'),假(FALSE 'f' 'false' 'n' 'no' 'off' '0')
         o   mood,                   //枚举类型，需要首先创建枚举类型mood 「CREATE TYPE mood AS ENUM ('sad', 'ok', 'happy');」
-        p
-        q
-        r
-        s
-        t
-        u
-        v
-        w
+        p   point,                  //平面中的点 (x,y)
+        q   line,                   //(无穷)直线 ((x1,y1),(x2,y2))
+        r   lseg,                   //线段 ((x1,y1),(x2,y2))
+        s   box,                    //矩形 ((x1,y1),(x2,y2))
+        t   path,                   //闭合路径「与多边形类似」 ((x1,y1),...)
+        u   path,                   //开放路径 [(x1,y1),...]
+        v   polygon,                //多边形「与闭合路径相似」((x1,y1),...)
+        w   circle,                 //圆 <(x,y),r> (圆心和半径)
         x
         y
         z
