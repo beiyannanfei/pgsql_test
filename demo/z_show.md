@@ -73,7 +73,8 @@
         z
     );
 ```
-NUMERIC - 用户指定的精度
+
+    NUMERIC - 用户指定的精度
     语法：NUMERIC(precision, scale);
     scale(标度): 小数部分的位数;
     precision(精度): 全部数据位的数目，也就是小数点两边的位数总和;
