@@ -69,9 +69,9 @@
         u   path,                   //开放路径 [(x1,y1),...]
         v   polygon,                //多边形「与闭合路径相似」((x1,y1),...)
         w   circle,                 //圆 <(x,y),r> (圆心和半径)
-        x
-        y
-        z
+        x   int[3][3],              //数组类型
+        y   inventory_item,         //复合类型,需要首先声明复合类型「CREATE TYPE inventory_item AS (name text,supplier_id integer,price numeric);」
+        z   json                    //JSON 数据
     );
 ```
 
@@ -83,6 +83,8 @@
         你可以认为整数的标度为零。        
         注意：如果一个要存储的数值的标度比字段声明的标度高，那么系统将尝试圆整(四舍五入)该数值到指定的小数位。
              如果小数点左边的数据位数超过了声明的精度减去声明的标度，那么将抛出一个错误。
+             
+JSON 函数和操作符[functions-json](http://www.postgres.cn/docs/9.3/functions-json.html)       
 
 
 
