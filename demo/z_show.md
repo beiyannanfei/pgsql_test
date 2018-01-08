@@ -41,7 +41,8 @@
 
 ### 5.表
     可以通过声明表的名字和所有字段的名字及其类型来创建表：
-    PostgreSQL支持标准的SQL类型： int, smallint, real, double precision, char(N), varchar(N), date, time, timestamp,和 interval，还支持其它的通用类型和丰富的几何类型。    
+    PostgreSQL支持标准的SQL类型：int, smallint, real, double precision, char(N), varchar(N), date, time, timestamp,
+    和 interval，还支持其它的通用类型和丰富的几何类型。    
 ```
     CREATE TABLE weather (
         a   varchar(80),
